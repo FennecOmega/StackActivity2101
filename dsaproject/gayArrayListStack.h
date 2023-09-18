@@ -52,5 +52,22 @@ void makeNull(Stack * L){
 
 }
 
-
-int x = 5;
+void displayList(Stack * L){
+	
+	Stack temp;
+	initializeStack(&temp);
+	
+	while(!isEmpty(*L)){
+		
+		printf("%d ",  L->data[L->top]);
+		temp.data[++temp.top] = isTop(*L);
+		popStack(L);
+		
+	}
+	
+	while(!isEmpty(temp)){
+		L->data[++L->top] = isTop(temp);
+		popStack(&temp);
+	}
+	
+}
