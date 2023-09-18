@@ -109,20 +109,32 @@ void popStack(Stack * L)
 void makeNull(Stack * L)
 {
 
-    /*
-     *   makeNull empties the Stack. This is done by freeing every node in the list, and setting our counter to 0.
-     *   It will first check if the stack is empty, if its not empty it will begin deleting the stack, otherwise it does nothing.
-     *   The function accepts a pointer to an Lstack datatype.
-     */
-
-    LIST temp;
     if (!isEmpty(*L))
     {
-        L->ctr -= L->ctr;
-        for (temp = L->top; L->top != NULL; temp = L->top)
-        {   
-            L->top = L->top->link;
-            free(temp);
-        }
+    	while(L->ctr > 0){
+    		popStack(L);
+		}
     }
+}
+
+void displayStack(Stack * L){
+	
+	Stack temp;
+	initializeStack(&temp);
+	
+	
+	printf("CURRENT STACK\n");
+	while(L->ctr > 0){
+		
+		printf("| %5d     |\n", isTop(*L));
+		pushStack(&temp, isTop(*L));
+		popStack(L);
+	}
+	printf("______________");
+	
+	while(temp.ctr > 0){
+		pushStack(L, isTop(temp));
+		popStack(&temp);
+	}
+	
 }
