@@ -1,5 +1,6 @@
 #include <stdlib.h>
-#include <stdbool.h> 
+#include <stdbool.h>
+#include <stdio.h>
 #define MAX 10
 
 // needed function operations: PUSH,POP, TOP, EMPTY, FULL, INITIALIZE, MAKENULL(?)
@@ -7,7 +8,7 @@
 // for linked list:
 typedef struct ArrayStack
 {
-    int data[MAX];
+    int data[MAX]; 
     int top;
 }Stack;
 
@@ -35,7 +36,8 @@ return (!isEmpty(L)) ? L.data[L.top] : 0;
 void pushStack(Stack * L, int data){
 
     if(!isFull(*L)){
-        L->data[++L->top] = data; 
+        L->data[++L->top] = data;
+         
     }
 
 }
@@ -61,15 +63,38 @@ void displayStack(Stack * L){
 	while(!isEmpty(*L)){
 		
 		printf("| %5d     |\n",  isTop(*L));
+        printf("_____________\n");
 		pushStack(&temp, isTop(*L));
 		popStack(L);
 		
 	}
-	printf("______________");
 	
 	while(!isEmpty(temp)){
 		pushStack(L, isTop(temp));
 		popStack(&temp);
 	}
 	
+}
+
+void insertBottom(Stack * L, int data){
+
+
+    Stack temp;
+	initializeStack(&temp);
+	if(!isFull(*L)){
+	while(!isEmpty(*L)){
+		
+		pushStack(&temp, isTop(*L));
+		popStack(L);
+		
+	    }
+
+        pushStack(L, data);
+	
+	while(!isEmpty(temp)){
+		pushStack(L, isTop(temp));
+		popStack(&temp);
+	    }
+    }
+
 }
