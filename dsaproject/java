@@ -1,0 +1,126 @@
+package com.mycompany.stackimplementation;
+
+/**
+ * The LIFO (Last-In, First-Out) class represents a basic stack data structure
+ * with a fixed capacity, implemented using an integer array.
+ * 
+ * @author CIS2101
+ */
+public class LIFO {
+    private static final int MAX = 10;
+    private int[] data;
+    private int top;
+
+    /**
+     * Constructs a new LIFO stack with the specified capacity.
+     */
+    public LIFO() {
+        data = new int[MAX];
+        top = -1;
+    }
+
+    /**
+     * Checks if the stack is empty.
+     * 
+     * @return {@code true} if the stack is empty, {@code false} otherwise.
+     */
+    public boolean isEmpty() {
+        return top == -1;
+    }
+
+    /**
+     * Checks if the stack is full.
+     * 
+     * @return {@code true} if the stack is full, {@code false} otherwise.
+     */
+    public boolean isFull() {
+        return top == MAX - 1;
+    }
+
+    /**
+     * Pushes an element onto the top of the stack.
+     * 
+     * @param data The element to push onto the stack.
+     */
+    public void push(int data) {
+        if (!isFull()) {
+            this.data[++top] = data;
+        }
+    }
+
+    /**
+     * Removes and discards the element from the top of the stack.
+     */
+    public void pop() {
+        if (!isEmpty()) {
+            top--;
+        }
+    }
+
+    /**
+     * Initializes the stack.
+     */
+    public void initializeStack() {
+        top = -1;
+    }
+
+    /**
+     * Retrieves the element at the top of the stack without removing it.
+     * 
+     * @return The element at the top of the stack, or 0 if the stack is empty.
+     */
+    public int top() {
+        return !isEmpty() ? data[top] : 0;
+    }
+
+    /**
+     * Gets the number of elements currently in the stack.
+     * 
+     * @return The number of elements in the stack.
+     */
+    public int length() {
+        return top + 1;
+    }
+
+    /**
+     * Displays the contents of the stack.
+     */
+    public void displayStack() {
+        LIFO temp = new LIFO();
+
+        System.out.println("CURRENT STACK");
+        while (!isEmpty()) {
+            System.out.printf("| %5d     |\n", top());
+            System.out.println("_____________");
+            temp.push(top());
+            pop();
+        }
+
+        while (!temp.isEmpty()) {
+            push(temp.top());
+            temp.pop();
+        }
+    }
+
+    /**
+     * Inserts an element at the bottom of the stack.
+     * 
+     * @param data The element to insert at the bottom of the stack.
+     */
+    public void insertBottom(int data) {
+        LIFO temp = new LIFO();
+        if (!isFull()) {
+            while (!isEmpty()) {
+                temp.push(top());
+                pop();
+            }
+
+            push(data);
+
+            while (!temp.isEmpty()) {
+                push(temp.top());
+                temp.pop();
+            }
+        }
+    }
+}
