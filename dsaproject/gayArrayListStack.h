@@ -52,21 +52,23 @@ void makeNull(Stack * L){
 
 }
 
-void displayList(Stack * L){
+void displayStack(Stack * L){
 	
 	Stack temp;
 	initializeStack(&temp);
 	
+	printf("CURRENT STACK\n");
 	while(!isEmpty(*L)){
 		
-		printf("%d ",  L->data[L->top]);
-		temp.data[++temp.top] = isTop(*L);
+		printf("| %5d     |\n",  isTop(*L));
+		pushStack(&temp, isTop(*L));
 		popStack(L);
 		
 	}
+	printf("______________");
 	
 	while(!isEmpty(temp)){
-		L->data[++L->top] = isTop(temp);
+		pushStack(L, isTop(temp));
 		popStack(&temp);
 	}
 	
