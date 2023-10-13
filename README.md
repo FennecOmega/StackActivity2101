@@ -8,7 +8,7 @@
 
 ArrayListStack.h contains Array Implementation of the Stack.
 CursorListStack.h contains CursorList Implementation of the Stack, as well as cursorlist functions.
-LinkedListStack.h contains CursorList Implementation of the Stack.
+LinkedListStack.h contains LinkedList Implementation of the Stack.
 driver.c contains all the test cases. Will work with any implementation.
 
 CursorListStack.h implements a global VirtualHeap.
